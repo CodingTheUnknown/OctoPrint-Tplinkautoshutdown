@@ -34,7 +34,7 @@ plugin_license = "AGPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here
 plugin_requires = [
-	"kasa"
+	"python-kasa --pre"
 ]
 
 ### --------------------------------------------------------------------------------------------------------------------
