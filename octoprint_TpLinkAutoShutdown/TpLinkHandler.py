@@ -9,12 +9,20 @@ class TpLinkHandler():
 	async def update(self):
 		await self.device.update()
 
-	def shutdown(self):
+	def shutdown_btn(self):
 		asyncio.create_task(self.device.turn_off())
 		return "shutdown"
 
-	def turnOn(self):
+	def turnOn_btn(self):
 		asyncio.create_task(self.device.turn_on())
+		return "Turning on"
+
+	def shutdown(self):
+		asyncio.run(self.device.turn_off())
+		return "shutdown"
+
+	def turnOn(self):
+		asyncio.run(self.device.turn_on())
 		return "Turning on"
 
 	def __repr__(self):
