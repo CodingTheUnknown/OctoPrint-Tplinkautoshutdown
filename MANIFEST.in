@@ -1,0 +1,4 @@
+include README.md
+recursive-include octoprint_TpLinkAutoShutdown/templates *
+recursive-include octoprint_TpLinkAutoShutdown/translations *
+recursive-include octoprint_TpLinkAutoShutdown/static *
