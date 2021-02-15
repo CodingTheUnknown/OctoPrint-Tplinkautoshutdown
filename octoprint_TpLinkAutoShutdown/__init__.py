@@ -68,5 +68,5 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 
 
 __plugin_name__ = "TpLinkHandler"
-__plugin_pythoncompat__ = ">=2.7,<4"
+__plugin_pythoncompat__ = ">=3.0,<4"
 __plugin_implementation__ = TpLinkAutoShutdown()
