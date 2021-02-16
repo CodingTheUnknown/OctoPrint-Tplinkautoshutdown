@@ -18,13 +18,13 @@ To connect your Kasa device, you will need to click the settings icon within the
 ## compatibility
 Although, this plugin may work with a number of other Kasa devices, this plugin has been designed to definitively work with the following devices.
 
-####Smart Plugs:
+#### Smart Plugs:
 * HS100
 * HS103
 * HS105
 * HS107
 * HS110
 
-##Authors
+## Authors
 - James D. McCannon - https://mccannon.me.uk
 
