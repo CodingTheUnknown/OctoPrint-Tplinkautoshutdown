@@ -22,11 +22,11 @@ archive: https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive
 
 compatibility:
   octoprint:
-  - 1.2.0
+  - 1.5.3
 
   os:
   - linux
   - windows
   - macos
 
-  python: ">=2.7,<3"
+  python: ">=3,<4"
