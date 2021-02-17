@@ -23,7 +23,6 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		elif event == "PrintPaused":
 			self._logger.info("Print paused")
 
-
 	def get_api_commands(self):
 		return dict(
 			turnOn=[],
@@ -51,13 +50,28 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			dict(type="settings", template="TpNavigation_settings.jinja2", custom_bindings=False),
 		]
 
-
 	def get_assets(self):
 		return dict(
 			js=['js/navbarControll.js']
+		)
+
+	def get_update_infomation(self):
+		return dict(
+			TpLinkAutoShutdown=dict(
+				display_name=self._plugin_name,
+				display_version=self._plugin_version,
+
+				type="github_release",
+				current=self._plugin_version,
+				user="jamesmccannon02",
+				pip="https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/{target_version}.zip"
+			)
 		)
 
 
 __plugin_name__ = "TpLinkHandler"
 __plugin_pythoncompat__ = ">=3.0,<4"
 __plugin_implementation__ = TpLinkAutoShutdown()
+__plugin_hooks__ = {
+"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_infomation
+}
