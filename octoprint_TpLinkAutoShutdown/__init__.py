@@ -42,7 +42,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
 
 	def get_settings_defaults(self):
-		return dict(url="Testing")
+		return dict(url="0.0.0.0")
 
 	def get_template_configs(self):
 		return [
