@@ -39,7 +39,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		elif command == "turnOff":
 			self._logger.info("Turning the printer OFF")
 			_conn.shutdown_btn()
-			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ...")
+			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
 
 	def get_settings_defaults(self):
 		return dict(url="Testing")
