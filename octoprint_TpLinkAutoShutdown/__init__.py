@@ -64,7 +64,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				type="github_release",
 				current=self._plugin_version,
 				user="jamesmccannon02",
-				pip="https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/{target_version}.zip"
+				pip="https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/v{target_version}.zip"
 			)
 		)
 
