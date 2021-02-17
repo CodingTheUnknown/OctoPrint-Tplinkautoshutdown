@@ -7,7 +7,7 @@ import flask
 
 class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.SettingsPlugin,
 						 octoprint.plugin.EventHandlerPlugin, octoprint.plugin.TemplatePlugin,
-						 octoprint.plugin.AssetPlugin, octoprint.plugin.SimpleApiPlugin):
+						 octoprint.plugin.AssetPlugin, octoprint.plugin.SimpleApiPlugin,):
 
 	def on_after_startup(self):
 		self._logger.info("Plugin TpLinkHandler has started")
@@ -55,15 +55,17 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			js=['js/navbarControll.js']
 		)
 
-	def get_update_infomation(self):
+	def get_update_information(self):
 		return dict(
 			TpLinkAutoShutdown=dict(
-				display_name=self._plugin_name,
+				display_name="TpLinkHandler",
 				display_version=self._plugin_version,
 
 				type="github_release",
-				current=self._plugin_version,
 				user="jamesmccannon02",
+				repo="OctoPrint-Tplinkautoshutdown",
+				current=self._plugin_version,
+
 				pip="https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/{target_version}.zip"
 			)
 		)
@@ -73,5 +75,5 @@ __plugin_name__ = "TpLinkHandler"
 __plugin_pythoncompat__ = ">=3.0,<4"
 __plugin_implementation__ = TpLinkAutoShutdown()
 __plugin_hooks__ = {
-"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_infomation
+"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
 }
