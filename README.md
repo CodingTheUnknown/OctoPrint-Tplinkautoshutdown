@@ -10,7 +10,7 @@ or manually using this URL:
 
     https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/master.zip
 
-#### Simple installation 123
+#### Simple installation
 
 Installation can be achieved through two options. The first and simplest option is to use the plugin manager within OctoPrint and search for TpLinkHandler. Then upon installation all you need to do is re-start you device and the plugin will be installed and ready for use.
 
