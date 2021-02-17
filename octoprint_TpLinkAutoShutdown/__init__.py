@@ -57,7 +57,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 
 	def get_update_information(self):
 		return dict(
-			TpLinkAutoShutdown=dict(
+			TpLinkHandler=dict(
 				display_name="TpLinkHandler",
 				display_version=self._plugin_version,
 
