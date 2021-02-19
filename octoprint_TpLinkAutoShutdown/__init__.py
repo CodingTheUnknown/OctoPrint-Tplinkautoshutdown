@@ -17,14 +17,17 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			self.conn.update()
 			self._logger.info(self.conn.get_plug_information())
 		except:
-			self._logger.info("+++++++++++ Can't connect +++++++++++++")
+			self._logger.info("+++++++++++ Can't connect to plug +++++++++++++")
 
 	def on_event(self, event, payload):
 		if event == "PrintDone":
-			self._logger.info("Print has completed")
-			self.conn.shutdown()
+			self._logger.info(f"The print has completed. Auto-shutdown is set to {self._settings.get(['auto'])}")
+			if self._settings.get(["auto"]):
+				self._logger.info("Printer is being shutdown")
+				self.conn.shutdown()
 		elif event == "PrintStarted":
-			self._logger.info("Print has PrintStarted")
+			self._logger.info(str(self._settings.get(["auto"])))
+			self._logger.info("Print has been started")
 			self.conn = wallPlug(self._settings.get(["url"]))
 			self.conn.update()
 		elif event == "PrintPaused":
@@ -61,7 +64,8 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		return dict(
 			url="0.0.0.0",
 			device="Unavailable",
-			firmwareVersion="Unavailable"
+			firmwareVersion="Unavailable",
+			auto=True
 		)
 
 	def on_settings_save(self, data):
