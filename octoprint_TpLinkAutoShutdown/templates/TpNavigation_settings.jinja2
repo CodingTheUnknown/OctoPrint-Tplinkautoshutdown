@@ -4,9 +4,21 @@
 </div>
     <div id="plugSettings">
         <p><b><u>Plug IP Address:</u></b></p>
-        <input type="text" class="input-box-level" data-bind="value: settings.plugins.TpLinkAutoShutdown.url">
+        <input type="text"  id="address" class="input-box-level" data-bind="value: settings.plugins.TpLinkAutoShutdown.url">
+        <p><button type="button" class="btn btn-warning" id="update">Update connection!</button></p>
     </div>
-    <div id="preferences">
+    <div id="device_info">
+        <h3>Device Info</h3>
+        <p><b><u>Device name:</u></b></p>
+        <input type="text" id="deviceName" data-bind="value: settings.plugins.TpLinkAutoShutdown.device" readonly>
+        <p><b><u>Device firmware version:</u></b></p>
+        <input type="text" id="firmwareVersion" data-bind="value: settings.plugins.TpLinkAutoShutdown.firmwareVersion" readonly>
+    </div>
+    <div id="options">
+        <h3>Preferences</h3>
+        <label class="options_input_label" for="autoMode">Auto-shutdown enabled
+        <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.auto"></label>
+
     </div>
 <div id="data_form">
 </div>
