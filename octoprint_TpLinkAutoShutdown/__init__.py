@@ -9,6 +9,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 						 octoprint.plugin.EventHandlerPlugin, octoprint.plugin.TemplatePlugin,
 						 octoprint.plugin.AssetPlugin, octoprint.plugin.SimpleApiPlugin):
 
+
 	def on_after_startup(self):
 		self._logger.info("Plugin TpLinkHandler has started")
 		try:
@@ -41,10 +42,12 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			self._logger.info("Turning the printer ON")
 			self.conn.turnOn_btn()
 			return flask.jsonify(res="Turning the 3D printer on. Please wait ... ")
+
 		elif command == "turnOff":
 			self._logger.info("Turning the printer OFF")
 			self.conn.shutdown_btn()
 			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
+		# Triggered when the user clicks to 'update connection' within the settings interface
 		elif command == "update":
 			try:
 				self.on_settings_save(data)
@@ -52,7 +55,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				self._logger.info(returnData)
 				return flask.jsonify(res=self.conn.get_plug_information())
 			except:
-				return flask.jsonify(res="Error Occured")
+				return flask.jsonify(res="Error Occurred")
 
 	def get_settings_defaults(self):
 		return dict(
@@ -83,7 +86,8 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 	# Setting the location of the assets such as javascript
 	def get_assets(self):
 		return dict(
-			js=["js/navbarControll.js", "js/settingsControll.js"]
+			js=["js/navbarControll.js", "js/settingsControll.js"],
+			css=["css/settingsControll.css"]
 		)
 
 	# This is being used to distribute updates
