@@ -46,24 +46,30 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			self.conn.shutdown_btn()
 			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
 		elif command == "update":
-			self.on_settings_save(data)
-			returnData = self.conn.get_plug_information()
-			self._logger.info(returnData)
-			return flask.jsonify(res=self.conn.get_plug_information())
+			try:
+				self.on_settings_save(data)
+				returnData = self.conn.get_plug_information()
+				self._logger.info(returnData)
+				return flask.jsonify(res=self.conn.get_plug_information())
+			except:
+				return flask.jsonify(res="Error Occured")
 
 	def get_settings_defaults(self):
 		return dict(
 			url="0.0.0.0",
-			deviceName="None"
+			device="Unavailable",
+			firmwareVersion="Unavailable"
 		)
 
 	def on_settings_save(self, data):
-		self._logger.info(data)
-		if data["url"] != self._settings.get(["url"]):
-			self._logger.info("++++=")
-			self.conn.__init__(data["url"])
-			self.conn.update_two()
-
+		try:
+			self._logger.info(data)
+			if data["url"] != self._settings.get(["url"]):
+				self._logger.info("++++=")
+				self.conn.__init__(data["url"])
+				self.conn.update_two()
+		except:
+			pass
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
 

@@ -1,8 +1,8 @@
 import asyncio
-from kasa import SmartPlug
+from kasa import SmartPlug, SmartDeviceException
 
 
-class TpLinkHandler():
+class TpLinkHandler(SmartDeviceException):
 	def __init__(self, address):
 		self.device = SmartPlug(address)
 
