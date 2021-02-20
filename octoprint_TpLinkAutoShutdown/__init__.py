@@ -1,6 +1,6 @@
 # coding=utf-8
 from __future__ import absolute_import
-from .TpLinkHandler import TpLinkHandler as wallPlug
+from .TpLinkHandlerSmartPlug import TpLinkHandlerSmartPlug as wallPlug
 import octoprint.plugin
 import flask
 
@@ -19,6 +19,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		except:
 			self._logger.info("+++++++++++ Can't connect to plug +++++++++++++")
 
+	# Triggered through system events wihtin the octoprint server
 	def on_event(self, event, payload):
 		if event == "PrintDone":
 			self._logger.info(f"The print has completed. Auto-shutdown is set to {self._settings.get(['auto'])}")
@@ -33,6 +34,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		elif event == "PrintPaused":
 			self._logger.info("Print paused")
 
+	# Defining the expected incoming data
 	def get_api_commands(self):
 		return dict(
 			turnOn=[],
@@ -40,6 +42,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			update=["url"]
 		)
 
+	# Handling the requests sent from javascript
 	def on_api_command(self, command, data):
 		if command == "turnOn":
 			self._logger.info("Turning the printer ON")
@@ -50,6 +53,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			self._logger.info("Turning the printer OFF")
 			self.conn.shutdown_btn()
 			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
+
 		# Triggered when the user clicks to 'update connection' within the settings interface
 		elif command == "update":
 			try:
@@ -62,10 +66,29 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 
 	def get_settings_defaults(self):
 		return dict(
-			url="0.0.0.0",
-			device="Unavailable",
-			firmwareVersion="Unavailable",
-			auto=True
+			smartPlug=dict(
+				url="0.0.0.0",
+				device="Unavailable",
+				firmwareVersion="Unavailable",
+				auto=True,
+			),
+			smartStrip=dict(
+				deviceOne=dict(
+					deviceName="Device One",
+					url="0.0.0.0",
+					firmwareVersion="Unavailable",
+				),
+				deviceTwo=dict(
+					deviceName="Device One",
+					url="0.0.0.0",
+					firmwareVersion="Unavailable",
+				),
+				deviceThree=dict(
+					deviceName="Device One",
+					url="0.0.0.0",
+					firmwareVersion="Unavailable",
+				),
+			),
 		)
 
 	def on_settings_save(self, data):
