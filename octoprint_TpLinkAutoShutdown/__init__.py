@@ -9,9 +9,10 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 						 octoprint.plugin.EventHandlerPlugin, octoprint.plugin.TemplatePlugin,
 						 octoprint.plugin.AssetPlugin, octoprint.plugin.SimpleApiPlugin):
 
-
 	def on_after_startup(self):
 		self._logger.info("Plugin TpLinkHandler has started")
+		# todo Check the type of plug used
+		# todo If Else dependent on the type of plug being used.
 		try:
 			self.conn = _conn = wallPlug(self._settings.get(["url"]))
 			self.conn.update()
@@ -45,11 +46,15 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 	# Handling the requests sent from javascript
 	def on_api_command(self, command, data):
 		if command == "turnOn":
+			# todo Check the type of plug used
+			# todo If Else dependent on the type of plug being used.
 			self._logger.info("Turning the printer ON")
 			self.conn.turnOn_btn()
 			return flask.jsonify(res="Turning the 3D printer on. Please wait ... ")
 
 		elif command == "turnOff":
+			# todo Check the type of plug used
+			# todo If Else dependent on the type of plug being used.
 			self._logger.info("Turning the printer OFF")
 			self.conn.shutdown_btn()
 			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
@@ -66,6 +71,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 
 	def get_settings_defaults(self):
 		return dict(
+			plugType="None",
 			smartPlug=dict(
 				url="0.0.0.0",
 				device="Unavailable",
@@ -102,8 +108,6 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			pass
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
-
-
 	def get_template_configs(self):
 		return [
 			dict(type="navbar", template="TpNavigation_navbar.jinja2"),
@@ -132,7 +136,6 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				pip="https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/{target_version}.zip"
 			)
 		)
-
 
 __plugin_name__ = "TpLinkHandler"
 __plugin_pythoncompat__ = ">=3.0,<4"
