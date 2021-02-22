@@ -6,6 +6,5 @@ document.getElementById("update").onclick = function update_info (){
             //console.log(responce.res.dev_name);
             document.getElementById("deviceName").value = responce.res.dev_name;
             document.getElementById("firmwareVersion").value = responce.res.sw_ver;
-
         })
 }
