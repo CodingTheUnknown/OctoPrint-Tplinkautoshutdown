@@ -43,7 +43,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		return dict(
 			turnOn=[],
 			turnOff=[],
-			update=["url"]
+			update=["url", "type"]
 		)
 
 	# Handling the requests sent from javascript
@@ -74,28 +74,35 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 
 	def get_settings_defaults(self):
 		return dict(
+			url="0.0.0.0",
+			device="Unavailable",
+			firmwareVersion="Unavailable",
 			plugType="None",
 			smartPlug=dict(
-				url="0.0.0.0",
-				device="Unavailable",
-				firmwareVersion="Unavailable",
 				auto=True,
+				movieDone=False,
 			),
 			smartStrip=dict(
 				deviceOne=dict(
-					deviceName="Device One",
-					url="0.0.0.0",
-					firmwareVersion="Unavailable",
+					light=False,
+					printer=False,
+					custom=False,
+					auto=False,
+					movieDone=False,
 				),
 				deviceTwo=dict(
-					deviceName="Device One",
-					url="0.0.0.0",
-					firmwareVersion="Unavailable",
+					light=False,
+					printer=False,
+					custom=False,
+					auto=False,
+					movieDone=False,
 				),
 				deviceThree=dict(
-					deviceName="Device One",
-					url="0.0.0.0",
-					firmwareVersion="Unavailable",
+					light=False,
+					printer=False,
+					custom=False,
+					auto=False,
+					movieDone=False,
 				),
 			),
 		)

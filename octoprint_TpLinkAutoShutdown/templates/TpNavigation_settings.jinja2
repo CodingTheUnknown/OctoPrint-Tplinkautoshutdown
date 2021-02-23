@@ -8,21 +8,77 @@
     <div id="plugSettings">
         <p><b><u>Plug IP Address:</u></b></p>
         <input type="text"  id="address" class="input-box-level" data-bind="value: settings.plugins.TpLinkAutoShutdown.url">
+        <select name="DeviceType" id="device">
+            <option value="smartPlug">Smart Plug</option>
+            <option value="smartStrip">Smart Strip</option>
+        </select>
         <p><button type="button" class="btn btn-warning" id="update">Update connection!</button></p>
     </div>
-    <div id="device_info">
+    <div id="smartPlugDeviceInfo">
         <h3>Device Info</h3>
         <p><b><u>Device name:</u></b></p>
         <input type="text" id="deviceName" data-bind="value: settings.plugins.TpLinkAutoShutdown.device" readonly>
         <p><b><u>Device firmware version:</u></b></p>
         <input type="text" id="firmwareVersion" data-bind="value: settings.plugins.TpLinkAutoShutdown.firmwareVersion" readonly>
     </div>
-    <div id="options">
+    <div id="smartPlugOptions">
         <h3>Preferences</h3>
         <label class="options_input_label" for="autoMode">Auto-shutdown enabled
-        <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.auto"></label>
+        <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartPlug.auto"></label>
         <label class="options_input_label" for="movieDone">Wait for timelapse to render
-        <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.movieDone"></label>
+        <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartPlug.movieDone"></label>
+    </div>
+    <div id="smartStripOptions">
+        <h3>Preferences</h3>
+        <table id="smartStripTable" style="width: 90%">
+            <tr>
+                <th>Plug Number</th>
+                <th>Socket Use</th>
+                <th> options</th>
+            </tr>
+            <tr id="plugOne" class="stripTable">
+                <td class="stripTable">Socket One</td>
+                <td class="stripTable">
+                    <label>Light <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceOne.light"></label>
+                    <label>Printer <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceOne.printer"></label>
+                    <label>Custom <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceOne.custom"></label>
+                </td>
+                <td class="stripTable">
+                    <label class="options_input_label" for="autoMode">Auto-shutdown enabled
+                    <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceOne.auto"></label>
+                    <label class="options_input_label" for="movieDone">Wait for timelapse to render
+                    <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceOne.movieDone"></label>
+                </td>
+            </tr>
+            <tr id="plugTwo" class="stripTable">
+                <td class="stripTable">Socket Two</td>
+                <td class="stripTable">
+                    <label>Light <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceTwo.light"></label>
+                    <label>Printer <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceTwo.printer"></label>
+                    <label>Custom <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceTwo.custom"></label>
+                </td>
+                <td class="stripTable">
+                    <label class="options_input_label" for="autoMode">Auto-shutdown enabled
+                    <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceTwo.auto"></label>
+                    <label class="options_input_label" for="movieDone">Wait for timelapse to render
+                    <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceTwo.movieDone"></label>
+                </td>
+            </tr>
+            <tr id="plugThree" class="stripTable">
+                <td class="stripTable">Socket Three</td>
+                <td class="stripTable">
+                    <label>Light <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceThree.light"></label>
+                    <label>Printer <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceThree.printer"></label>
+                    <label>Custom <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceThree.custom"></label>
+                </td>
+                <td class="stripTable">
+                    <label class="options_input_label" for="autoMode">Auto-shutdown enabled
+                    <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceThree.auto"></label>
+                    <label class="options_input_label" for="movieDone">Wait for timelapse to render
+                    <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceThree.movieDone"></label>
+                </td>
+            </tr>
+        </table>
     </div>
 <div id="data_form">
 </div>
