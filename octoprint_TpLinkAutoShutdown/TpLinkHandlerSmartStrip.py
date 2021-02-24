@@ -12,6 +12,14 @@ class TpLinkHandlerSmartStrip(SmartDeviceException):
 	def update_two(self):
 		asyncio.create_task(self.device.update())
 
+	def shutdown_btn(self):
+		asyncio.create_task(self.device.turn_off())
+		return "shutdown"
+
+	def turnOn_btn(self):
+		asyncio.create_task(self.device.turn_on())
+		return "Turning on"
+
 	def turn_on(self, plugNumber):
 		asyncio.run(self.device.children[plugNumber].turn_on())
 
