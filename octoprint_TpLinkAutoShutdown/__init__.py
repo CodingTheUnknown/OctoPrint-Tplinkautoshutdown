@@ -49,7 +49,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				elif self._settings.get(["smartStrip", "deviceTwo", "auto"]) and self._settings.get(["smartStrip", "deviceTwo", "movieDone"] == False):
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(2)
-				elif self._settings.get(["smartStrip", "deviceThree", "auto"]) and self._settings.get(["smartStrip", "deviceThree", "movieDone"] == False): # Needs to have == false
+				elif self._settings.get(["smartStrip", "deviceThree", "auto"]) and self._settings.get(["smartStrip", "deviceThree", "movieDone"] == False):
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(3)
 		elif event == "PrintStarted":
@@ -149,7 +149,6 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		try:
 			self._logger.info(data)
 			if data["url"] != self._settings.get(["url"]):
-				self._logger.info("++++=")
 				self.conn.__init__(data["url"])
 				self.conn.update_two()
 		except:
