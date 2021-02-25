@@ -43,13 +43,13 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			# If the plug being used is a smartStrip
 			elif self._settings.get(["type"]) == "smartStrip":
 				# check the setting Preferences of each socket
-				if self._settings.get(["smartStrip", "deviceOne", "auto"]) and self._settings.get(["smartStrip", "deviceOne", "movieDone"]):
+				if self._settings.get(["smartStrip", "deviceOne", "auto"]) and self._settings.get(["smartStrip", "deviceOne", "movieDone"] == False):
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(1)
-				elif self._settings.get(["smartStrip", "deviceTwo", "auto"]) and self._settings.get(["smartStrip", "deviceTwo", "movieDone"]):
+				elif self._settings.get(["smartStrip", "deviceTwo", "auto"]) and self._settings.get(["smartStrip", "deviceTwo", "movieDone"] == False):
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(2)
-				elif self._settings.get(["smartStrip", "deviceThree", "auto"]) and self._settings.get(["smartStrip", "deviceThree", "movieDone"]):
+				elif self._settings.get(["smartStrip", "deviceThree", "auto"]) and self._settings.get(["smartStrip", "deviceThree", "movieDone"] == False): # Needs to have == false
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(3)
 		elif event == "PrintStarted":
@@ -115,6 +115,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			device="Unavailable",
 			firmwareVersion="Unavailable",
 			type="None",
+			plugType="None",
 			smartPlug=dict(
 				auto=True,
 				movieDone=False,
