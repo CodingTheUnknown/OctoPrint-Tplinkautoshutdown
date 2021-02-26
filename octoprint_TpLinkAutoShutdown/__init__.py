@@ -92,7 +92,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 	def get_assets(self):
 		return dict(
 			js=["js/navbarControll.js", "js/settingsControll.js"],
-			css=["css/settingsControll.css"]
+			css=["css/settingsControll.css", "css/navbarControll.css"],
 		)
 
 	# This is being used to distribute updates
