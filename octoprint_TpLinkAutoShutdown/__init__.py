@@ -29,7 +29,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			except:
 				self._logger.info("+++++++++++ Can't connect to strip +++++++++++++")
 		else:
-			self._logger("+++++++++++ Aborted on Startup connection +++++++++++")
+			self._logger.info("+++++++++++ Aborted on Startup connection +++++++++++")
 
 	# Triggered through system events wihtin the octoprint server
 	def on_event(self, event, payload):
