@@ -29,7 +29,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			except:
 				self._logger.info("+++++++++++ Can't connect to strip +++++++++++++")
 		else:
-			self._logger("+++++++++++Aborted onStartup connection+++++++++++")
+			self._logger("+++++++++++ Aborted on Startup connection +++++++++++")
 
 	# Triggered through system events wihtin the octoprint server
 	def on_event(self, event, payload):
@@ -148,11 +148,17 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 	def on_settings_save(self, data):
 		try:
 			self._logger.info(data)
-			if data["url"] != self._settings.get(["url"]):
-				self.conn.__init__(data["url"])
+			if data["type"] == "smartPlug":
+				self.conn = wallPlug(data["url"])
 				self.conn.update_two()
+			elif data["type"] == "smartStrip":
+				self.conn = wallStrip(data["url"])
+				self.conn.update_two()
+			# if data["url"] != self._settings.get(["url"]):
+			# 	self.conn.__init__(data["url"])
+			# 	self.conn.update_two()
 		except:
-			pass
+			self._logger.warning("Error updating connection with the smart sockets within on_settings_save")
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
 	def get_template_configs(self):
