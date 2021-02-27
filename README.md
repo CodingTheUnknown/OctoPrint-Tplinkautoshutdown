@@ -3,6 +3,9 @@
 This plugin is designed to help you integrate your IoT TP-Link Kasa wireless plug into OctoPrint. The basis of the plug-in is to enable you to automatically switch-off your 3D printer
 once a print has successfully completed.
 
+## Requirements
+* Python >=3.7, <4.0
+
 ## Setup
 
 Install via the bundled [Plugin Manager](https://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)
