@@ -31,7 +31,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		else:
 			self._logger.info("+++++++++++ Aborted on Startup connection +++++++++++")
 
-	# Triggered through system events wihtin the octoprint server
+	# Triggered through system events within the octoprint server
 	def on_event(self, event, payload):
 		if event == "PrintDone":
 			# If the plug being used is a smartPlug
@@ -41,17 +41,18 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown()
 			# If the plug being used is a smartStrip
+			# Children are zero indexed, contrary to documentation
 			elif self._settings.get(["type"]) == "smartStrip":
 				# check the setting Preferences of each socket
 				if self._settings.get(["smartStrip", "deviceOne", "auto"]) and self._settings.get(["smartStrip", "deviceOne", "movieDone"]) == False:
 					self._logger.info("Printer is being shutdown")
-					self.conn.shutdown(1)
+					self.conn.shutdown(0)
 				elif self._settings.get(["smartStrip", "deviceTwo", "auto"]) and self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) == False:
 					self._logger.info("Printer is being shutdown")
-					self.conn.shutdown(2)
+					self.conn.shutdown(1)
 				elif self._settings.get(["smartStrip", "deviceThree", "auto"]) and self._settings.get(["smartStrip", "deviceThree", "movieDone"]) == False:
 					self._logger.info("Printer is being shutdown")
-					self.conn.shutdown(3)
+					self.conn.shutdown(2)
 		elif event == "PrintStarted":
 			if self._settings.get(["type"]) == "smartPlug":
 				self._logger.info(str(self._settings.get(["smartPlug", "auto"])))
@@ -69,11 +70,11 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 					self.conn.shutdown()
 			elif self._settings.get(["type"]) == "smartStrip":
 				if self._settings.get(["smartStrip", "deviceOne", "movieDone"]) and self._settings.get(["smartStrip", "deviceOne", "auto"]):
-					self.conn.shutdown(1)
+					self.conn.shutdown(0)
 				elif self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(["smartStrip", "deviceTwo", "auto"]):
-					self.conn.shutdown(2)
+					self.conn.shutdown(1)
 				elif self._settings.get(["smartStrip", "deviceThree", "movieDone"]) and self._settings.get(["smartStrip", "deviceThree", "auto"]):
-					self.conn.shutdown(3)
+					self.conn.shutdown(2)
 		elif event == "PrintPaused":
 			self._logger.info("Print paused")
 
