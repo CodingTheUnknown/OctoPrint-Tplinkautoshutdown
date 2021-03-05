@@ -47,10 +47,10 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				if self._settings.get(["smartStrip", "deviceOne", "auto"]) and self._settings.get(["smartStrip", "deviceOne", "movieDone"]) == False:
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(0)
-				elif self._settings.get(["smartStrip", "deviceTwo", "auto"]) and self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) == False:
+				if self._settings.get(["smartStrip", "deviceTwo", "auto"]) and self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) == False:
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(1)
-				elif self._settings.get(["smartStrip", "deviceThree", "auto"]) and self._settings.get(["smartStrip", "deviceThree", "movieDone"]) == False:
+				if self._settings.get(["smartStrip", "deviceThree", "auto"]) and self._settings.get(["smartStrip", "deviceThree", "movieDone"]) == False:
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown(2)
 		elif event == "PrintStarted":
@@ -71,9 +71,9 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			elif self._settings.get(["type"]) == "smartStrip":
 				if self._settings.get(["smartStrip", "deviceOne", "movieDone"]) and self._settings.get(["smartStrip", "deviceOne", "auto"]):
 					self.conn.shutdown(0)
-				elif self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(["smartStrip", "deviceTwo", "auto"]):
+				if self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(["smartStrip", "deviceTwo", "auto"]):
 					self.conn.shutdown(1)
-				elif self._settings.get(["smartStrip", "deviceThree", "movieDone"]) and self._settings.get(["smartStrip", "deviceThree", "auto"]):
+				if self._settings.get(["smartStrip", "deviceThree", "movieDone"]) and self._settings.get(["smartStrip", "deviceThree", "auto"]):
 					self.conn.shutdown(2)
 		elif event == "PrintPaused":
 			self._logger.info("Print paused")
