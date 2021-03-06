@@ -86,9 +86,6 @@ To connect to your smart device, simply download the plugin and navigate to 'set
 
 To connect your Kasa device, you will need to click the settings icon within the navigation bar and then down the right-hand side of your screen (under ‘plugins’) you can select the ‘TpLinkHandler’. Then type the IP address of your smart-plug and click save. Now you are ready.
 
-## How the plugin works
-Currently, the plugin is always activated. This means that whilst activated within the Plugin Manager, the 3D printer will turn off automatically upon completion of a 3D Print.
-
 ## compatibility
 
 Although, this plugin may work with a number of other Kasa devices, this plugin has been designed to definitively work with the following devices.
