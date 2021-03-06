@@ -150,10 +150,10 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		try:
 			self._logger.info(data)
 			if data["type"] == "smartPlug":
-				self.conn = wallPlug(data["url"])
+				#self.conn = wallPlug(data["url"])
 				self.conn.update_two()
 			elif data["type"] == "smartStrip":
-				self.conn = wallStrip(data["url"])
+				#self.conn = wallStrip(data["url"])
 				self.conn.update_two()
 		except:
 			self._logger.warning("Error updating connection with the smart sockets within on_settings_save")
