@@ -14,3 +14,8 @@
   top: -1px;
   *overflow: hidden;
 }
+
+.stripTable{
+    text-align: center;
+    border: 1px solid black;
+}

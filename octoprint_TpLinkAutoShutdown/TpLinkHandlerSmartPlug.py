@@ -1,8 +1,9 @@
 import asyncio
 from kasa import SmartPlug, SmartDeviceException
+from .ThreadedWorker import ThreadedWorker
 
 
-class TpLinkHandler(SmartDeviceException):
+class TpLinkHandlerSmartPlug(SmartDeviceException):
 	def __init__(self, address):
 		self.device = SmartPlug(address)
 
@@ -11,6 +12,10 @@ class TpLinkHandler(SmartDeviceException):
 
 	def update_two(self):
 		asyncio.create_task(self.device.update())
+
+	def update_three(self):
+		future = asyncio.run_coroutine_threadsafe(self.device.update(), self.worker.loop)
+		result = future.result()
 
 	def shutdown_btn(self):
 		asyncio.create_task(self.device.turn_off())
