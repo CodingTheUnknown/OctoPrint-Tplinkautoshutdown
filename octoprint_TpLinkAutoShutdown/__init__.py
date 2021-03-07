@@ -38,7 +38,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			# If the plug being used is a smartPlug
 			if self._settings.get(["type"]) == "smartPlug":
 				self._logger.info(f"The print has completed. Auto-shutdown is set to {str(self._settings.get(['smartPlug', 'auto']))}")
-				if self._settings.get(["smartPlug", "auto"]) and self._settings.get(["smartPlug", "movieDone"]) == False:
+				if self._settings.get(["smartPlug", "auto"]) and not self._settings.get(["smartPlug", "movieDone"]):
 					self._logger.info("Printer is being shutdown")
 					self.conn.shutdown()
 			# If the plug being used is a smartStrip
