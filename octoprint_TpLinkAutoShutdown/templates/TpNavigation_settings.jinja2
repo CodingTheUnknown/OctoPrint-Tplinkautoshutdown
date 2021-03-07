@@ -9,13 +9,10 @@
         <li>Select your device type from the drop-down menu.</li>
         <li>Click save.</li>
         <li>Restart the server.</li>
-        <li>Click update connection.</li>
+        <li>Click show configuration.</li>
         <li>Select your preferences and click save. You are now ready to go!</li>
     </ul>
 </div>
-    <h3> This is not the public version</h3>
-    <p>If you change the type of plug from smart plug to smart strip or smart strip to smart plug, you must re-start your OctoPrint server.</p>
-
     <div id="plugSettings">
         <p><b><u>Plug IP Address:</u></b></p>
         <input type="text"  id="address" class="input-box-level" data-bind="value: settings.plugins.TpLinkAutoShutdown.url">
@@ -23,7 +20,7 @@
             <option value="smartPlug">Smart Plug</option>
             <option value="smartStrip">Smart Strip</option>
         </select>
-        <p><button type="button" class="btn btn-warning" id="update">Update connection!</button></p>
+        <p><button type="button" class="btn btn-warning" id="update">show configuration!</button></p>
     </div>
     <div id="smartPlugDeviceInfo">
         <h3>Device Info</h3>
