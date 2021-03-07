@@ -32,7 +32,7 @@ class TpLinkHandlerSmartStrip(SmartDeviceException):
 		asyncio.run(self.device.children[plugNumber].turn_off())
 
 	def get_plug_information(self):
-		return self.device.children
+		return self.device.hw_info
 
 	def __repr__(self):
 		pass
