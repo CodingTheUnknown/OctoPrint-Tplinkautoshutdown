@@ -70,12 +70,11 @@ Contributions (be it adding missing features, fixing bugs or improving documenta
 ## Screenshots
 Top navigation buttons to allow simple manual controll over the Tp-Link device
 
-![navigation bar image](https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/blob/develop-powerStrip/assets/Buttons_navigation.png?raw=true)
+![navigation bar image](https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/blob/master/assets/Buttons_navigation.png?raw=true)
 
 Views from within the settings
 
-![Smart plug settings](https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/blob/develop-powerStrip/assets/smartPlug_settings.png?raw=true)
+![Smart plug settings](https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/blob/master/assets/smartPlug_settings.png?raw=true)
 
-![Smart strip settings](https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/blob/develop-powerStrip/assets/smartStrip_settings.png?raw=true)
-
+![Smart strip settings](https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/blob/master/assets/smartStrip_settings.png?raw=true)
 
