@@ -28,3 +28,5 @@ document.getElementById("update").onclick = function update_info (){
        document.getElementById("smartPlugOptions").style.display = "none";
     }
 }
+
+

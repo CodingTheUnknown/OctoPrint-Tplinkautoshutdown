@@ -167,7 +167,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 	# Setting the location of the assets such as javascript
 	def get_assets(self):
 		return dict(
-			js=["js/navbarControll.js", "js/settingsControll.js"],
+			js=["js/navbarControll.js", "js/settingsControll.js", "js/cancelSwitch.js"],
 			css=["css/settingsControll.css", "css/navbarControll.css"],
 		)
 
