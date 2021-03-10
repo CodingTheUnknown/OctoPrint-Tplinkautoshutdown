@@ -84,7 +84,8 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		return dict(
 			turnOn=[],
 			turnOff=[],
-			update=["url", "type"]
+			update=["url", "type"],
+			wait_printDone=[]
 		)
 
 	# Handling the requests sent from javascript
@@ -110,6 +111,8 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				return flask.jsonify(res=self.conn.get_plug_information())
 			except:
 				return flask.jsonify(res="Error Occurred")
+		elif command == "wait_printDone":
+			pass
 
 	def get_settings_defaults(self):
 		return dict(
