@@ -1,12 +1,10 @@
 
 document.getElementById("turnOff").onclick = function turnOffPrinter() {
-    var conf = confirm("Are you sure?");
+    var conf = confirm("Are you sure you wish to turn OFF your smart plug?");
 
     if (conf == true) {
         OctoPrint.simpleApiCommand("TpLinkAutoShutdown", "turnOff", {"value" : "False"})
-            .done(function(responce) {
-                alert(responce.res);
-            });
+            .done(function(responce) {});
     }else{
         console.log("Operation cancelled");
         alert("Operation cancelled");
@@ -14,13 +12,11 @@ document.getElementById("turnOff").onclick = function turnOffPrinter() {
 }
 
 document.getElementById("turnOn").onclick = function turnOnPrinter() {
-    var conf = confirm("are you sure?");
+    var conf = confirm("Are you sure you wish to turn ON your smart plug?");
 
     if (conf == true) {
         OctoPrint.simpleApiCommand("TpLinkAutoShutdown", "turnOn", {"value" : "False"})
-        .done(function(responce) {
-            alert(responce.res);
-        });
+        .done(function(responce) {});
     }else{
         console.log("The operation has been cancelled");
     }

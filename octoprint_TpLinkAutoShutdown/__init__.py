@@ -31,29 +31,37 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		else:
 			self._logger.info("+++++++++++ Aborted on Startup connection +++++++++++")
 
+
+	def plugHandler(self):
+		# If the plug being used is a smartPlug
+		if self._settings.get(["type"]) == "smartPlug":
+			self._logger.info(
+				f"The print has completed. Auto-shutdown is set to {str(self._settings.get(['smartPlug', 'auto']))}")
+			if self._settings.get(["smartPlug", "auto"]) and not self._settings.get(["smartPlug", "movieDone"]):
+				self._logger.info("Printer is being shutdown")
+				self.conn.shutdown()
+		# If the plug being used is a smartStrip
+		# Children are zero indexed, contrary to documentation
+		elif self._settings.get(["type"]) == "smartStrip":
+			# check the setting Preferences of each socket
+			if self._settings.get(["smartStrip", "deviceOne", "auto"]) and not self._settings.get(
+					["smartStrip", "deviceOne", "movieDone"]):
+				self._logger.info("Socket one is being shutdown")
+				self.conn.shutdown(0)
+			if self._settings.get(["smartStrip", "deviceTwo", "auto"]) and not self._settings.get(
+					["smartStrip", "deviceTwo", "movieDone"]):
+				self._logger.info("Socket two is being shutdown")
+				self.conn.shutdown(1)
+			if self._settings.get(["smartStrip", "deviceThree", "auto"]) and not self._settings.get(
+					["smartStrip", "deviceThree", "movieDone"]):
+				self._logger.info("Socket three is being shutdown")
+				self.conn.shutdown(2)
+
 	# Triggered through system events within the octoprint server
 	# noinspection PyArgumentList
 	def on_event(self, event, payload):
 		if event == "PrintDone":
-			# If the plug being used is a smartPlug
-			if self._settings.get(["type"]) == "smartPlug":
-				self._logger.info(f"The print has completed. Auto-shutdown is set to {str(self._settings.get(['smartPlug', 'auto']))}")
-				if self._settings.get(["smartPlug", "auto"]) and not self._settings.get(["smartPlug", "movieDone"]):
-					self._logger.info("Printer is being shutdown")
-					self.conn.shutdown()
-			# If the plug being used is a smartStrip
-			# Children are zero indexed, contrary to documentation
-			elif self._settings.get(["type"]) == "smartStrip":
-				# check the setting Preferences of each socket
-				if self._settings.get(["smartStrip", "deviceOne", "auto"]) and not self._settings.get(["smartStrip", "deviceOne", "movieDone"]):
-					self._logger.info("Socket one is being shutdown")
-					self.conn.shutdown(0)
-				if self._settings.get(["smartStrip", "deviceTwo", "auto"]) and not self._settings.get(["smartStrip", "deviceTwo", "movieDone"]):
-					self._logger.info("Socket two is being shutdown")
-					self.conn.shutdown(1)
-				if self._settings.get(["smartStrip", "deviceThree", "auto"]) and not self._settings.get(["smartStrip", "deviceThree", "movieDone"]):
-					self._logger.info("Socket three is being shutdown")
-					self.conn.shutdown(2)
+			self.plugHandler()
 		elif event == "PrintStarted":
 			if self._settings.get(["type"]) == "smartPlug":
 				self._logger.info(str(self._settings.get(["smartPlug", "auto"])))
@@ -66,16 +74,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				self.conn = wallStrip(self._settings.get(["url"]))
 				self.conn.update()
 		elif event == "MovieDone":
-			if self._settings.get(["type"]) == "smartPlug":
-				if self._settings.get(["smartPlug", "movieDone"]) and self._settings.get(["smartPlug", "auto"]):
-					self.conn.shutdown()
-			elif self._settings.get(["type"]) == "smartStrip":
-				if self._settings.get(["smartStrip", "deviceOne", "movieDone"]) and self._settings.get(["smartStrip", "deviceOne", "auto"]):
-					self.conn.shutdown(0)
-				if self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(["smartStrip", "deviceTwo", "auto"]):
-					self.conn.shutdown(1)
-				if self._settings.get(["smartStrip", "deviceThree", "movieDone"]) and self._settings.get(["smartStrip", "deviceThree", "auto"]):
-					self.conn.shutdown(2)
+			self.plugHandler()
 		elif event == "PrintPaused":
 			self._logger.info("Print paused")
 
