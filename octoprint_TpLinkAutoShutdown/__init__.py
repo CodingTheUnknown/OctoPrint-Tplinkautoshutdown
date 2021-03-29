@@ -14,14 +14,14 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		self._logger.info("Plugin TpLinkHandler has started")
 		# todo Check the type of plug used
 		# todo If Else dependent on the type of plug being used.
-		if self._settings.get(["type"]) == "smartPlug":
+		if self._settings.get(["deviceType"]) == "smartPlug":
 			try:
 				self.conn = wallPlug(self._settings.get(["url"]))
 				self.conn.update()
 				self._logger.info(self.conn.get_plug_information())
 			except:
 				self._logger.info("+++++++++++ Can't connect to plug +++++++++++++")
-		elif self._settings.get(["type"]) == "smartStrip":
+		elif self._settings.get(["deviceType"]) == "smartStrip":
 			try:
 				self.conn = wallStrip(self._settings.get(["url"]))
 				self.conn.update()
@@ -34,7 +34,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 
 	def plugHandler(self):
 		# If the plug being used is a smartPlug
-		if self._settings.get(["type"]) == "smartPlug":
+		if self._settings.get(["deviceType"]) == "smartPlug":
 			self._logger.info(
 				f"The print has completed. Auto-shutdown is set to {str(self._settings.get(['smartPlug', 'auto']))}")
 			if self._settings.get(["smartPlug", "auto"]) and not self._settings.get(["smartPlug", "movieDone"]):
@@ -42,7 +42,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				self.conn.shutdown()
 		# If the plug being used is a smartStrip
 		# Children are zero indexed, contrary to documentation
-		elif self._settings.get(["type"]) == "smartStrip":
+		elif self._settings.get(["deviceType"]) == "smartStrip":
 			# check the setting Preferences of each socket
 			if self._settings.get(["smartStrip", "deviceOne", "auto"]) and not self._settings.get(
 					["smartStrip", "deviceOne", "movieDone"]):
@@ -63,12 +63,12 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		if event == "PrintDone":
 			self.plugHandler()
 		elif event == "PrintStarted":
-			if self._settings.get(["type"]) == "smartPlug":
+			if self._settings.get(["deviceType"]) == "smartPlug":
 				self._logger.info(str(self._settings.get(["smartPlug", "auto"])))
 				self._logger.info("Print has been started")
 				self.conn = wallPlug(self._settings.get(["url"]))
 				self.conn.update()
-			elif self._settings.get(["type"]) == "smartStrip":
+			elif self._settings.get(["deviceType"]) == "smartStrip":
 				self._logger.info(str(self._settings.get(["smartStrip", "auto"])))
 				self._logger.info("Print has been started")
 				self.conn = wallStrip(self._settings.get(["url"]))
@@ -83,7 +83,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		return dict(
 			turnOn=[],
 			turnOff=[],
-			update=["url", "type"]
+			update=["url", "deviceType"]
 		)
 
 	# Handling the requests sent from javascript
@@ -115,7 +115,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			url="0.0.0.0",
 			device="Unavailable",
 			firmwareVersion="Unavailable",
-			type="None",
+			deviceTypee="None",
 			plugType="None",
 			smartPlug=dict(
 				auto=True,
