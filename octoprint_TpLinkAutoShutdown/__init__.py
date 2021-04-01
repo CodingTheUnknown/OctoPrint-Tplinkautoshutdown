@@ -74,7 +74,16 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				self.conn = wallStrip(self._settings.get(["url"]))
 				self.conn.update()
 		elif event == "MovieDone":
-			self.plugHandler()
+			if self._settings.get(["type"]) == "smartPlug":
+				if self._settings.get(["smartPlug", "movieDone"]) and self._settings.get(["smartPlug", "auto"]):
+					self.conn.shutdown()
+			elif self._settings.get(["type"]) == "smartStrip":
+				if self._settings.get(["smartStrip", "deviceOne", "movieDone"]) and self._settings.get(["smartStrip", "deviceOne", "auto"]):
+					self.conn.shutdown(0)
+				if self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(["smartStrip", "deviceTwo", "auto"]):
+					self.conn.shutdown(1)
+				if self._settings.get(["smartStrip", "deviceThree", "movieDone"]) and self._settings.get(["smartStrip", "deviceThree", "auto"]):
+					self.conn.shutdown(2)
 		elif event == "PrintPaused":
 			self._logger.info("Print paused")
 
