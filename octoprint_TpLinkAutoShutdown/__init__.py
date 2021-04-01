@@ -74,10 +74,10 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				self.conn = wallStrip(self._settings.get(["url"]))
 				self.conn.update()
 		elif event == "MovieDone":
-			if self._settings.get(["type"]) == "smartPlug":
+			if self._settings.get(["deviceType"]) == "smartPlug":
 				if self._settings.get(["smartPlug", "movieDone"]) and self._settings.get(["smartPlug", "auto"]):
 					self.conn.shutdown()
-			elif self._settings.get(["type"]) == "smartStrip":
+			elif self._settings.get(["deviceType"]) == "smartStrip":
 				if self._settings.get(["smartStrip", "deviceOne", "movieDone"]) and self._settings.get(["smartStrip", "deviceOne", "auto"]):
 					self.conn.shutdown(0)
 				if self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(["smartStrip", "deviceTwo", "auto"]):
