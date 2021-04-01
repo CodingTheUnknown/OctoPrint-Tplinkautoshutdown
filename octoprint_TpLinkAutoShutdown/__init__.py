@@ -124,7 +124,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			url="0.0.0.0",
 			device="Unavailable",
 			firmwareVersion="Unavailable",
-			deviceTypee="None",
+			deviceType="None",
 			plugType="None",
 			smartPlug=dict(
 				auto=True,
