@@ -7,7 +7,7 @@ window.onload = function() {
 
 document.getElementById("update").onclick = function update_info (){
     var address = document.getElementById("address").value;
-    var deviceType = document.getElementById("device").value;
+    var deviceType = document.getElementById("deviceType").value;
     OctoPrint.simpleApiCommand("TpLinkAutoShutdown", "update", {"url": address, "deviceType": deviceType})
         .done(function(responce){
             //console.log(responce.res.dev_name);
