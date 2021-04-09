@@ -113,7 +113,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			self._logger.info("Turning the printer OFF")
 			self._printer.disconnect()
 			self.conn.shutdown_btn()
-			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
+			return flask.jsonify(res="")
 		# Triggered when the user clicks to 'update connection' within the settings interface
 		elif command == "update":
 			try:
