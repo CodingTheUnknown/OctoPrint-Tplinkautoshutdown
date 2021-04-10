@@ -4,6 +4,7 @@ from .TpLinkHandlerSmartPlug import TpLinkHandlerSmartPlug as wallPlug
 from .TpLinkHandlerSmartStrip import TpLinkHandlerSmartStrip as wallStrip
 import octoprint.plugin
 import flask
+from threading import Timer
 
 
 class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.SettingsPlugin,
@@ -95,6 +96,10 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			update=["url", "deviceType"]
 		)
 
+	# Connect to the printer (executed after a timeout)
+	def connect_to_printer(self):
+		self._printer.connect()	
+
 	# Handling the requests sent from javascript
 	def on_api_command(self, command, data):
 		if command == "turnOn":
@@ -102,7 +107,8 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			# todo If Else dependent on the type of plug being used.
 			self._logger.info("Turning the printer ON")
 			self.conn.turnOn_btn()
-			self._printer.connect()
+			t = Timer(2,self.connect_to_printer)
+			t.start()
 			return flask.jsonify(res="Turning the 3D printer on. Please wait ... ")
 		elif command == "turnOff":
 			# todo Check the type of plug used
