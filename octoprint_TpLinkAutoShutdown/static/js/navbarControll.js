@@ -4,7 +4,7 @@ document.getElementById("turnOff").onclick = function turnOffPrinter() {
 
     if (conf == true) {
         OctoPrint.simpleApiCommand("TpLinkAutoShutdown", "turnOff", {"value" : "False"})
-            .done(function(responce) {});
+            .done(function(responce) {if (responce.res != "") alert(responce.res)});
     }else{
         console.log("Operation cancelled");
         alert("Operation cancelled");

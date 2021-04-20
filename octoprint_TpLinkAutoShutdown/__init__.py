@@ -4,6 +4,7 @@ from .TpLinkHandlerSmartPlug import TpLinkHandlerSmartPlug as wallPlug
 from .TpLinkHandlerSmartStrip import TpLinkHandlerSmartStrip as wallStrip
 import octoprint.plugin
 import flask
+from threading import Timer
 
 
 class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.SettingsPlugin,
@@ -95,6 +96,10 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			update=["url", "deviceType"]
 		)
 
+	# Connect to the printer (executed after a timeout)
+	def connect_to_printer(self):
+		self._printer.connect()	
+
 	# Handling the requests sent from javascript
 	def on_api_command(self, command, data):
 		if command == "turnOn":
@@ -102,13 +107,19 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			# todo If Else dependent on the type of plug being used.
 			self._logger.info("Turning the printer ON")
 			self.conn.turnOn_btn()
+			t = Timer(2,self.connect_to_printer)
+			t.start()
 			return flask.jsonify(res="Turning the 3D printer on. Please wait ... ")
 		elif command == "turnOff":
 			# todo Check the type of plug used
 			# todo If Else dependent on the type of plug being used.
+			if self._printer.is_printing() :
+				self._logger.info("Printer is busy")
+				return flask.jsonify(res="Cannot turn printer off.  Printer is busy")
 			self._logger.info("Turning the printer OFF")
+			self._printer.disconnect()
 			self.conn.shutdown_btn()
-			return flask.jsonify(res="Turning the 3D printer off. 3 ... 2 ... 1 ....")
+			return flask.jsonify(res="")
 		# Triggered when the user clicks to 'update connection' within the settings interface
 		elif command == "update":
 			try:
