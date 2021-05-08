@@ -3,6 +3,7 @@ window.onload = function() {
     document.getElementById("smartPlugDeviceInfo").style.display = "none";
     document.getElementById("smartPlugOptions").style.display = "none";
     document.getElementById("smartStripOptions").style.display = "none";
+    document.getElementById("btnControl").style.display = "none";
 }
 
 document.getElementById("update").onclick = function update_info (){
@@ -19,12 +20,15 @@ document.getElementById("update").onclick = function update_info (){
        document.getElementById("smartPlugDeviceInfo").style.display = "block";
        document.getElementById("smartPlugOptions").style.display = "block";
        document.getElementById("smartStripOptions").style.display = "none";
+       document.getElementById("btnControl").style.display = "none";
     }else if (deviceType == "smartStrip"){
        document.getElementById("smartPlugDeviceInfo").style.display = "block";
        document.getElementById("smartPlugOptions").style.display = "none";
        document.getElementById("smartStripOptions").style.display = "block";
+       document.getElementById("btnControl").style.display = "block";
     }else{
        document.getElementById("smartPlugDeviceInfo").style.display = "none";
        document.getElementById("smartPlugOptions").style.display = "none";
+       document.getElementById("btnControl").style.display = "none";
     }
 }

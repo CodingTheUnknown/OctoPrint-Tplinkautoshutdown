@@ -17,11 +17,11 @@ class TpLinkHandlerSmartPlug(SmartDeviceException):
 		future = asyncio.run_coroutine_threadsafe(self.device.update(), self.worker.loop)
 		result = future.result()
 
-	def shutdown_btn(self):
+	def shutdown_btn(self, settings):
 		asyncio.create_task(self.device.turn_off())
 		return "shutdown"
 
-	def turnOn_btn(self):
+	def turnOn_btn(self, settings):
 		asyncio.create_task(self.device.turn_on())
 		return "Turning on"
 

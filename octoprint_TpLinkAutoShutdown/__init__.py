@@ -98,7 +98,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 
 	# Connect to the printer (executed after a timeout)
 	def connect_to_printer(self):
-		self._printer.connect()	
+		self._printer.connect()
 
 	# Handling the requests sent from javascript
 	def on_api_command(self, command, data):
@@ -106,7 +106,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			# todo Check the type of plug used
 			# todo If Else dependent on the type of plug being used.
 			self._logger.info("Turning the printer ON")
-			self.conn.turnOn_btn()
+			self.conn.turnOn_btn(self._settings)
 			t = Timer(2,self.connect_to_printer)
 			t.start()
 			return flask.jsonify(res="Turning the 3D printer on. Please wait ... ")
@@ -118,7 +118,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				return flask.jsonify(res="Cannot turn printer off.  Printer is busy")
 			self._logger.info("Turning the printer OFF")
 			self._printer.disconnect()
-			self.conn.shutdown_btn()
+			self.conn.shutdown_btn(self._settings)
 			return flask.jsonify(res="")
 		# Triggered when the user clicks to 'update connection' within the settings interface
 		elif command == "update":
@@ -136,6 +136,11 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			device="Unavailable",
 			firmwareVersion="Unavailable",
 			deviceType="None",
+			navButton=dict(
+				deviceOne=True,
+				deviceTwo=True,
+				deviceThree=True,
+			),
 			smartPlug=dict(
 				auto=True,
 				movieDone=False,
