@@ -59,6 +59,7 @@ Although, this plugin may work with a number of other Kasa devices, this plugin 
 
 #### Smart Strips:
 * KP303
+* HS300
 
 ## Authors
 
