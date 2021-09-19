@@ -193,8 +193,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 					light=False,
 					printer=False,
 					custom=False,
-					# test
-					auto=True,
+					auto=False,
 					movieDone=False,
 				),
 				deviceFour=dict(
