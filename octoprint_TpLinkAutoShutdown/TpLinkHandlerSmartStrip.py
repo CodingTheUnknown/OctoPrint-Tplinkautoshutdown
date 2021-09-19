@@ -24,6 +24,12 @@ class TpLinkHandlerSmartStrip(SmartDeviceException):
 			asyncio.create_task(self.device.children[1].turn_off())
 		if settings.get(["navButton", "deviceThree"]):
 			asyncio.create_task(self.device.children[2].turn_off())
+		if settings.get(["navButton", "deviceFour"]):
+			asyncio.create_task(self.device.children[3].turn_off())
+		if settings.get(["navButton", "deviceFive"]):
+			asyncio.create_task(self.device.children[4].turn_off())
+		if settings.get(["navButton", "deviceSix"]):
+			asyncio.create_task(self.device.children[5].turn_off())
 		return "shutdown"
 
 	def turnOn_btn(self, settings):
@@ -33,6 +39,12 @@ class TpLinkHandlerSmartStrip(SmartDeviceException):
 			asyncio.create_task(self.device.children[1].turn_on())
 		if settings.get(["navButton", "deviceThree"]):
 			asyncio.create_task(self.device.children[2].turn_on())
+		if settings.get(["navButton", "deviceFour"]):
+			asyncio.create_task(self.device.children[3].turn_on())
+		if settings.get(["navButton", "deviceFive"]):
+			asyncio.create_task(self.device.children[4].turn_on())
+		if settings.get(["navButton", "deviceSix"]):
+			asyncio.create_task(self.device.children[5].turn_on())
 		return "Turning on"
 
 	def turn_on(self, plugNumber):
@@ -46,3 +58,4 @@ class TpLinkHandlerSmartStrip(SmartDeviceException):
 
 	def __repr__(self):
 		pass
+	

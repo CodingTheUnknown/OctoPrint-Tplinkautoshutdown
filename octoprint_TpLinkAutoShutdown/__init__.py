@@ -32,7 +32,6 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 		else:
 			self._logger.info("+++++++++++ Aborted on Startup connection +++++++++++")
 
-
 	def plugHandler(self):
 		# If the plug being used is a smartPlug
 		if self._settings.get(["deviceType"]) == "smartPlug":
@@ -43,6 +42,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				self.conn.shutdown()
 		# If the plug being used is a smartStrip
 		# Children are zero indexed, contrary to documentation
+		# Added sockets for HS300 Support
 		elif self._settings.get(["deviceType"]) == "smartStrip":
 			# check the setting Preferences of each socket
 			if self._settings.get(["smartStrip", "deviceOne", "auto"]) and not self._settings.get(
@@ -57,9 +57,22 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 					["smartStrip", "deviceThree", "movieDone"]):
 				self._logger.info("Socket three is being shutdown")
 				self.conn.shutdown(2)
+			if self._settings.get(["smartStrip", "deviceFour", "auto"]) and not self._settings.get(
+					["smartStrip", "deviceFour", "movieDone"]):
+				self._logger.info("Socket four is being shutdown")
+				self.conn.shutdown(3)
+			if self._settings.get(["smartStrip", "deviceFive", "auto"]) and not self._settings.get(
+					["smartStrip", "deviceFive", "movieDone"]):
+				self._logger.info("Socket five is being shutdown")
+				self.conn.shutdown(4)
+			if self._settings.get(["smartStrip", "deviceSix", "auto"]) and not self._settings.get(
+					["smartStrip", "deviceSix", "movieDone"]):
+				self._logger.info("Socket six is being shutdown")
+				self.conn.shutdown(5)
 
 	# Triggered through system events within the octoprint server
 	# noinspection PyArgumentList
+	# Updated for H300
 	def on_event(self, event, payload):
 		if event == "PrintDone":
 			self.plugHandler()
@@ -79,12 +92,24 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				if self._settings.get(["smartPlug", "movieDone"]) and self._settings.get(["smartPlug", "auto"]):
 					self.conn.shutdown()
 			elif self._settings.get(["deviceType"]) == "smartStrip":
-				if self._settings.get(["smartStrip", "deviceOne", "movieDone"]) and self._settings.get(["smartStrip", "deviceOne", "auto"]):
+				if self._settings.get(["smartStrip", "deviceOne", "movieDone"]) and self._settings.get(
+						["smartStrip", "deviceOne", "auto"]):
 					self.conn.shutdown(0)
-				if self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(["smartStrip", "deviceTwo", "auto"]):
+				if self._settings.get(["smartStrip", "deviceTwo", "movieDone"]) and self._settings.get(
+						["smartStrip", "deviceTwo", "auto"]):
 					self.conn.shutdown(1)
-				if self._settings.get(["smartStrip", "deviceThree", "movieDone"]) and self._settings.get(["smartStrip", "deviceThree", "auto"]):
+				if self._settings.get(["smartStrip", "deviceThree", "movieDone"]) and self._settings.get(
+						["smartStrip", "deviceThree", "auto"]):
 					self.conn.shutdown(2)
+				if self._settings.get(["smartStrip", "deviceFour", "movieDone"]) and self._settings.get(
+						["smartStrip", "deviceFour", "auto"]):
+					self.conn.shutdown(3)
+				if self._settings.get(["smartStrip", "deviceFive", "movieDone"]) and self._settings.get(
+						["smartStrip", "deviceFive", "auto"]):
+					self.conn.shutdown(4)
+				if self._settings.get(["smartStrip", "deviceSix", "movieDone"]) and self._settings.get(
+						["smartStrip", "deviceSix", "auto"]):
+					self.conn.shutdown(5)
 		elif event == "PrintPaused":
 			self._logger.info("Print paused")
 
@@ -107,13 +132,13 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			# todo If Else dependent on the type of plug being used.
 			self._logger.info("Turning the printer ON")
 			self.conn.turnOn_btn(self._settings)
-			t = Timer(2,self.connect_to_printer)
+			t = Timer(2, self.connect_to_printer)
 			t.start()
 			return flask.jsonify(res="Turning the 3D printer on. Please wait ... ")
 		elif command == "turnOff":
 			# todo Check the type of plug used
 			# todo If Else dependent on the type of plug being used.
-			if self._printer.is_printing() :
+			if self._printer.is_printing():
 				self._logger.info("Printer is busy")
 				return flask.jsonify(res="Cannot turn printer off.  Printer is busy")
 			self._logger.info("Turning the printer OFF")
@@ -130,6 +155,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 			except:
 				return flask.jsonify(res="Error Occurred")
 
+	# Updated for HS300
 	def get_settings_defaults(self):
 		return dict(
 			url="0.0.0.0",
@@ -140,6 +166,9 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				deviceOne=True,
 				deviceTwo=True,
 				deviceThree=True,
+				deviceFour=True,
+				deviceFive=True,
+				deviceSix=True,
 			),
 			smartPlug=dict(
 				auto=True,
@@ -161,6 +190,27 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 					movieDone=False,
 				),
 				deviceThree=dict(
+					light=False,
+					printer=False,
+					custom=False,
+					auto=False,
+					movieDone=False,
+				),
+				deviceFour=dict(
+					light=False,
+					printer=False,
+					custom=False,
+					auto=False,
+					movieDone=False,
+				),
+				deviceFive=dict(
+					light=False,
+					printer=False,
+					custom=False,
+					auto=False,
+					movieDone=False,
+				),
+				deviceSix=dict(
 					light=False,
 					printer=False,
 					custom=False,
@@ -206,6 +256,7 @@ class TpLinkAutoShutdown(octoprint.plugin.StartupPlugin, octoprint.plugin.Settin
 				pip="https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/{target_version}.zip"
 			)
 		)
+
 
 __plugin_name__ = "TpLinkHandler"
 __plugin_pythoncompat__ = ">=3.7,<4"

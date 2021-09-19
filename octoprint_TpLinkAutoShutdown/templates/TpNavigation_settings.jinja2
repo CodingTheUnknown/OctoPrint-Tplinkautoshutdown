@@ -86,6 +86,48 @@
                     <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceThree.movieDone"></label>
                 </td>
             </tr>
+                        <tr id="plugFour" class="stripTable">
+                <td class="stripTable">Socket Four</td>
+                <td class="stripTable">
+                    <label>Light <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFour.light"></label>
+                    <label>Printer <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFour.printer"></label>
+                    <label>Custom <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFour.custom"></label>
+                </td>
+                <td class="stripTable">
+                    <label class="options_input_label" for="autoMode">Auto-shutdown enabled
+                    <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFour.auto"></label>
+                    <label class="options_input_label" for="movieDone">Wait for timelapse to render
+                    <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFour.movieDone"></label>
+                </td>
+            </tr>
+            <tr id="plugFive" class="stripTable">
+                <td class="stripTable">Socket Five</td>
+                <td class="stripTable">
+                    <label>Light <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFive.light"></label>
+                    <label>Printer <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFive.printer"></label>
+                    <label>Custom <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFive.custom"></label>
+                </td>
+                <td class="stripTable">
+                    <label class="options_input_label" for="autoMode">Auto-shutdown enabled
+                    <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFive.auto"></label>
+                    <label class="options_input_label" for="movieDone">Wait for timelapse to render
+                    <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceFive.movieDone"></label>
+                </td>
+            </tr>
+            <tr id="plugSix" class="stripTable">
+                <td class="stripTable">Socket Six</td>
+                <td class="stripTable">
+                    <label>Light <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceSix.light"></label>
+                    <label>Printer <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceSix.printer"></label>
+                    <label>Custom <input type="checkbox" class="options_input_checkbox" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceSix.custom"></label>
+                </td>
+                <td class="stripTable">
+                    <label class="options_input_label" for="autoMode">Auto-shutdown enabled
+                    <input type="checkbox" class="options_input_checkbox" id="autoMode" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceSix.auto"></label>
+                    <label class="options_input_label" for="movieDone">Wait for timelapse to render
+                    <input type="checkbox" class="options_input_checkbox" id="movieDone" data-bind="checked: settings.plugins.TpLinkAutoShutdown.smartStrip.deviceSix.movieDone"></label>
+                </td>
+            </tr>
         </table>
     </div>
     <div id="btnControl">
@@ -99,6 +141,15 @@
             </label>
             <label class="checkbox inline">
               <input type="checkbox" id="inlineCheckbox3" data-bind="checked: settings.plugins.TpLinkAutoShutdown.navButton.deviceThree"> Plug three
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" id="inlineCheckbox4" data-bind="checked: settings.plugins.TpLinkAutoShutdown.navButton.deviceFour"> Plug four
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" id="inlineCheckbox5" data-bind="checked: settings.plugins.TpLinkAutoShutdown.navButton.deviceFive"> Plug five
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" id="inlineCheckbox6" data-bind="checked: settings.plugins.TpLinkAutoShutdown.navButton.deviceSix"> Plug six
             </label>
         </form>
     </div>
