@@ -63,7 +63,7 @@ Although, this plugin may work with a number of other Kasa devices, this plugin 
 
 ## Authors
 
-- James D. McCannon - https://mccannon.me.uk
+- James D. McCannon
 
 ## Contributions
 Contributions (be it adding missing features, fixing bugs or improving documentation) are more than welcome, feel free to submit pull requests!
