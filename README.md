@@ -11,7 +11,7 @@ once a print has successfully completed.
 Install via the bundled [Plugin Manager](https://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)
 or manually using this URL:
 
-    https://github.com/jamesmccannon02/OctoPrint-Tplinkautoshutdown/archive/master.zip
+    https://github.com/CodingTheUnknown/OctoPrint-Tplinkautoshutdown.git
 
 #### Simple installation
 
