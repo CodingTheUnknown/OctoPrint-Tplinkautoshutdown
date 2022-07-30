@@ -37,14 +37,6 @@ To connect to your smart device, simply download the plugin and navigate to 'set
 3. choose if you want your timelapse to render before the plug is turned off automatically (great if you use the same plug for OctoPrint and the printer).
 4. When using the smart strip KP303 you can manually decide what each socket does.
 
-#### Features coming soon
-1.	Within the near future, you will be able to control how your printer reacts once a print has finished, paused, started etc.
-2.	Additionally, an automatic search for your IoT device will be added. This will save you as the user searching for your Smart Plug.
-3.	Integration will be added to control other Kasa devices including smart lights, bulbs.
-4.	Any other recommendations are welcomed.
-
-To connect your Kasa device, you will need to click the settings icon within the navigation bar and then down the right-hand side of your screen (under ‘plugins’) you can select the ‘TpLinkHandler’. Then type the IP address of your smart-plug and click save. Now you are ready.
-
 ## compatibility
 
 Although, this plugin may work with a number of other Kasa devices, this plugin has been designed to definitively work with the following devices.
